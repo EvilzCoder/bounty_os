@@ -36,5 +36,6 @@ RUN go install github.com/projectdiscovery/katana/cmd/katana@latest
 RUN go install github.com/lc/gau/v2/cmd/gau@latest
 RUN go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
 
+RUN mkdir -p /root/programs
 
 ENTRYPOINT ["/bin/zsh"]
