@@ -9,4 +9,4 @@ Pre-installed bug bounty recon tools
 `docker build . -t bounty_os`
 
 ### Run Docker Image
-`docker run -v ./srv/programs/:/root/programs -it bounty_os`
+`docker run -d -v ./srv/programs/:/root/programs -it bounty_os`

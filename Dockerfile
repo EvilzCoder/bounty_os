@@ -35,7 +35,13 @@ RUN go install github.com/hahwul/dalfox/v2@latest
 RUN go install github.com/projectdiscovery/katana/cmd/katana@latest
 RUN go install github.com/lc/gau/v2/cmd/gau@latest
 RUN go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
+RUN go install -v github.com/tomnomnom/gf@latest
+
+COPY /Users/minthantwai/subenum /go/bin/subenum
+
+RUN chmod +x /go/bin/*
 
 RUN mkdir -p /root/programs
+
 
 ENTRYPOINT ["/bin/zsh"]
