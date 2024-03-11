@@ -1,0 +1,26 @@
+echo 'Enumerating Subdomains' 
+subfinder -d $1 -o subfinder_$1.txt
+sublist3r -d $1 -o sublist3r_$1.txt
+assetfinder -subs-only $1 assetfinder_$1.txt
+
+echo 'Gathering all subdomains'
+cat subfinder_* sublist3r_* assetfinder_*  > subdomains.txt
+
+echo "Testing http/https with HTTPX"
+httpx -l subdomains.txt -o httpx.txt
+
+echo "Crawling endpoints"
+echo $1 | gau --threads 5 >> Endpoints.txt
+cat httpx.txt | katana -jc >> Endpoints.txt
+
+echo "Sorted out Endpoints.txt"
+cat Endpoints.txt | uro >> Endpoints_sorted.txt
+
+echo "Get XSS Endpoints"
+
+cat Endpoints_sorted.txt | gf xss >> XSS.txt
+
+cat XSS.txt | Gxss -p khXSS -o XSS_Ref.txt
+
+dalfox file XSS_Ref.txt -o Vulnerable_XSS.txt
+
