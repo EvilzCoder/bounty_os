@@ -27,21 +27,22 @@ COPY config/.zshrc .
 
 ENV PATH="$PATH:/root/go/bin/"
 
-RUN apt install golang-go netcat-openbsd python3 python3-pip subfinder sublist3r amass assetfinder -y
+RUN apt install golang-go netcat-openbsd python3 python3-pip subfinder sublist3r amass assetfinder ffuf gobuster -y
 RUN pip3 install arjun
 RUN pip3 install uro
 
 RUN go install github.com/hahwul/dalfox/v2@latest   
 RUN go install github.com/projectdiscovery/katana/cmd/katana@latest
 RUN go install github.com/lc/gau/v2/cmd/gau@latest
-RUN go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
-RUN go install -v github.com/tomnomnom/gf@latest
+RUN go install github.com/projectdiscovery/httpx/cmd/httpx@latest
+RUN go install github.com/tomnomnom/gf@latest
 RUN go install github.com/KathanP19/Gxss@latest
-
-
-COPY ./subenum /go/bin/subenum
+RUN go install github.com/visma-prodsec/confused@latest
+RUN go install github.com/tomnomnom/concurl@latest
+RUN go install github.com/tomnomnom/qsreplace@latest 
 
 RUN chmod +x /go/bin/*
+RUN mv ~/go/bin/* /usr/bin/*
 
 RUN mkdir -p /root/programs
 
